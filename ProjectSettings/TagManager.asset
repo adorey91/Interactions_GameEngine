@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SpawnPoint
   - Interactable
+  - Nothing
   layers:
   - Default
   - TransparentFX
@@ -43,12 +44,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Player
-    uniqueID: 3907191273
-    locked: 0
   - name: Buildings
     uniqueID: 1585666415
     locked: 0
   - name: Interactions
     uniqueID: 85442763
+    locked: 0
+  - name: Player
+    uniqueID: 3907191273
     locked: 0

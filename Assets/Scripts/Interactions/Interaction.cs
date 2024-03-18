@@ -14,7 +14,7 @@ public class Interaction : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && interactableObject != null)
+        if (Input.GetKeyDown(KeyCode.Return) && interactableObject != null)
         {
             CheckInteraction();
         }
@@ -22,12 +22,23 @@ public class Interaction : MonoBehaviour
 
     void CheckInteraction()
     {
-        
+        if (interactableObject.interactType == InteractableObject.InteractType.Nothing)
+            interactableObject.Nothing();
+        if(interactableObject.interactType == InteractableObject.InteractType.Pickup)
+            interactableObject.Pickup();
+        if(interactableObject.interactType == InteractableObject.InteractType.Info)
+            interactableObject.Info();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         interactable = collision.gameObject;
-        interactableObject = GetComponent<InteractableObject>();
+        interactableObject = interactable.GetComponent<InteractableObject>();
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        interactable = null;
+        interactableObject = null;
     }
 }
