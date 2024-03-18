@@ -16,6 +16,7 @@ public class InteractableObject : MonoBehaviour
     public InteractType interactType;
 
     [Header("Information")]
+    [SerializeField] TextMeshProUGUI information;
     [SerializeField] TMP_Text infoText;
     public string infoMessage;
 
@@ -34,9 +35,22 @@ public class InteractableObject : MonoBehaviour
     void Nothing()
     {
 
+        Debug.Log("Nothing is happening");
+                
     }
 
     void Info()
+    {
+        StartCoroutine(ShowInfo(infoMessage, 0.5f));
+
+    }
+
+    void Pickup()
+    {
+
+    }
+
+    void Dialogue()
     {
 
     }
