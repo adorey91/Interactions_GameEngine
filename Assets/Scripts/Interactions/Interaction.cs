@@ -6,38 +6,41 @@ public class Interaction : MonoBehaviour
 {
     [SerializeField] GameObject interactable = null;
     [SerializeField] InteractableObject interactableObject = null;
+    [SerializeField] GameObject canInteract;
 
-    void Start()
+    private void Start()
     {
-        
+        canInteract.SetActive(false);
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return) && interactableObject != null)
-        {
             CheckInteraction();
-        }
     }
 
     void CheckInteraction()
     {
         if (interactableObject.interactType == InteractableObject.InteractType.Nothing)
             interactableObject.Nothing();
-        if(interactableObject.interactType == InteractableObject.InteractType.Pickup)
+        else if(interactableObject.interactType == InteractableObject.InteractType.Pickup)
             interactableObject.Pickup();
-        if(interactableObject.interactType == InteractableObject.InteractType.Info)
+        else if(interactableObject.interactType == InteractableObject.InteractType.Info)
             interactableObject.Info();
+        else if(interactableObject.interactType == InteractableObject.InteractType.Dialogue)
+            interactableObject.Dialogue();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        canInteract.SetActive(true);
         interactable = collision.gameObject;
         interactableObject = interactable.GetComponent<InteractableObject>();
     }
 
     public void OnTriggerExit2D(Collider2D collision)
     {
+        canInteract.SetActive(false);
         interactable = null;
         interactableObject = null;
     }
