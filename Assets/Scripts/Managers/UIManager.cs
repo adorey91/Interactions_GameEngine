@@ -13,14 +13,13 @@ public class UIManager : MonoBehaviour
     public GameObject optionsUI;
     public GameObject gameOverUI;
     public GameObject gameWinUI;
-    public TMP_Text returnOptions;
 
     [Header("Player Settings")]
     public GameObject player;
     public GameObject playerSprite;
     private PlayerController playerController;
 
-    private void Start()
+    private void Awake()
     {
         playerController = player.GetComponent<PlayerController>();
     }
@@ -33,8 +32,10 @@ public class UIManager : MonoBehaviour
 
     public void UI_GamePlay()
     {
+        player.GetComponent<Interaction>().enabled = true;
+        playerSprite.GetComponent<Animator>().enabled = true;
         PlayerNGame(true, true, CursorLockMode.Locked, false, 1f);
-        SetUIActive(gameUI); 
+        SetUIActive(gameUI);
     }
 
     public void UI_Pause()
@@ -46,7 +47,7 @@ public class UIManager : MonoBehaviour
     public void UI_GameOver()
     {
         PlayerNGame(false, false, CursorLockMode.None, true, 0f);
-        SetUIActive (gameOverUI);
+        SetUIActive(gameOverUI);
     }
 
     public void UI_GameWin()
@@ -59,6 +60,13 @@ public class UIManager : MonoBehaviour
     {
         PlayerNGame(false, false, CursorLockMode.None, true, 0f);
         SetUIActive(optionsUI);
+    }
+
+    public void UI_Dialogue()
+    {
+        PlayerNGame(true, false, CursorLockMode.None, true, 1f);
+        player.GetComponent<Interaction>().enabled = false;
+        playerSprite.GetComponent<Animator>().enabled = false;
     }
 
     void SetUIActive(GameObject activeUI)

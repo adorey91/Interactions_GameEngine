@@ -9,7 +9,6 @@ public class CameraBackground : MonoBehaviour
     [SerializeField] private Slider redSlider;
     [SerializeField] private Slider greenSlider;
     [SerializeField] private Slider blueSlider;
-    [SerializeField] private Slider alphaSlider;
 
     public Camera playerCamera;
 
@@ -17,10 +16,9 @@ public class CameraBackground : MonoBehaviour
     public void Start()
     {
         playerCamera = GetComponent<Camera>();
-        redSlider.value = 1;
-        greenSlider.value = 1;
-        blueSlider.value = 1;
-        alphaSlider.value = 1;
+        redSlider.value = 0.5f;
+        greenSlider.value = 0.7f;
+        blueSlider.value = 1f;
     }
 
     public void Update()
@@ -30,6 +28,6 @@ public class CameraBackground : MonoBehaviour
 
     public void ColorChange()
     {
-        playerCamera.backgroundColor = new Color(redSlider.value, greenSlider.value, blueSlider.value, alphaSlider.value);
+        playerCamera.backgroundColor = new Color(redSlider.value, greenSlider.value, blueSlider.value);
     }
 }

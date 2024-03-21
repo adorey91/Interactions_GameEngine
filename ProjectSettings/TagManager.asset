@@ -7,7 +7,8 @@ TagManager:
   - SpawnPoint
   - Interactable
   - Nothing
-  - ThoughtPanel
+  - InfoDialogue
+  - Thought
   layers:
   - Default
   - TransparentFX

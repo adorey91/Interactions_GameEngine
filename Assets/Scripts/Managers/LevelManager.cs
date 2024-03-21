@@ -4,44 +4,39 @@ using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
+    [Header("Manager")]
     public GameManager _gameManager;
-    public string beforeOptions;
-    
+
+    public string SceneName()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
+
     public void LoadScene(string sceneName)
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.LoadScene(sceneName);
 
-        switch(sceneName)
+        if (sceneName.StartsWith("MainMenu"))
+            _gameManager.LoadState(sceneName);
+        else if (sceneName.StartsWith("Gameplay"))
+            _gameManager.LoadState("Gameplay");
+
+        // Can load one of two panels with the game end scene.
+        else if (sceneName.StartsWith("GameEnd"))
         {
-            case "MainMenu": _gameManager.gameState = GameManager.GameState.MainMenu; break;
-            case "Gameplay_field": _gameManager.gameState = GameManager.GameState.GamePlay; break;
-            case "Gameplay_Scene2": _gameManager.gameState = GameManager.GameState.GamePlay; break;
-            case "GameWin": _gameManager.gameState = GameManager.GameState.GameWin; break;
-            case "GameOver": _gameManager.gameState = GameManager.GameState.GameOver; break;
-            case "Options": 
-                _gameManager.gameState = GameManager.GameState.Options; break;
+            if (sceneName.EndsWith("GameOver"))
+                _gameManager.LoadState("GameOver");
+            else if (sceneName.EndsWith("GameWin"))
+                _gameManager.LoadState("GameWin");
+
+            sceneName = "GameEnd";
         }
-    }
-
-    public void ExitOptions()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.LoadScene(_gameManager.beforeOptions.ToString());
-        if (_gameManager.beforeOptions == "MainMenu")
-            _gameManager.gameState = GameManager.GameState.MainMenu;
-        else
-            _gameManager.gameState = GameManager.GameState.Pause;
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-        Debug.Log("Quitting Game");
+        SceneManager.LoadScene(sceneName);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        _gameManager.MovePlayerToSpawnLocation();
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

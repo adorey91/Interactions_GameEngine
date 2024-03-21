@@ -23,19 +23,22 @@ public class Interaction : MonoBehaviour
     {
         if (interactableObject.interactType == InteractableObject.InteractType.Nothing)
             interactableObject.Nothing();
-        else if(interactableObject.interactType == InteractableObject.InteractType.Pickup)
+        else if (interactableObject.interactType == InteractableObject.InteractType.Pickup)
             interactableObject.Pickup();
-        else if(interactableObject.interactType == InteractableObject.InteractType.Info)
+        else if (interactableObject.interactType == InteractableObject.InteractType.Info)
             interactableObject.Info();
-        else if(interactableObject.interactType == InteractableObject.InteractType.Dialogue)
+        else if (interactableObject.interactType == InteractableObject.InteractType.Dialogue)
             interactableObject.Dialogue();
+        else if (interactableObject.interactType == InteractableObject.InteractType.Signs)
+            interactableObject.Signs();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        canInteract.SetActive(true);
         interactable = collision.gameObject;
         interactableObject = interactable.GetComponent<InteractableObject>();
+        if (interactableObject != null)
+            canInteract.SetActive(true);
     }
 
     public void OnTriggerExit2D(Collider2D collision)
