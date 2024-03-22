@@ -50756,10 +50756,13 @@ MonoBehaviour:
   infoUI: {fileID: 0}
   infoDialogue: {fileID: 0}
   dialogue:
-  - ...
-  - What do you want?
-  - Everythings closed...
-  - Go Away.
+  - 'Listen up, kid. '
+  - 'You wanna survive in this town, you gotta learn to play dirty. And lucky for
+    you, I''m the best teacher around. '
+  - 'I''ll show you how to hustle, how to swindle, how to get what you want without
+    breaking a sweat. '
+  - But remember, everything comes with a price.
+  - You ready to pay up?
   infoText: {fileID: 0}
 --- !u!1 &1980300326
 GameObject:

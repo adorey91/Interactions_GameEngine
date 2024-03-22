@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEngine.Timeline.AnimationPlayableAsset;
+using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -15,11 +16,42 @@ public class DialogueManager : MonoBehaviour
 
     private Queue<string> dialogueQueue;
 
+    private int _currentlyVisibleCharacterIndex;
+    private Coroutine _typewriterCoroutine;
+
+    private WaitForSeconds _simpleDelay;
+    private WaitForSeconds _interpuntuationDelay;
+
+    [Header("Typewriter Settings")]
+    [SerializeField] float characterPerSecond = 20;
+    [SerializeField] float interpuntuationDelay = 0.5f;
+
+    //Skipping Functionality
+    private bool _currentlySkipping;
+    private WaitForSeconds _skipDelay;
+
+    [Header("Skip Options")]
+    [SerializeField] bool quickSkip;
+    [SerializeField][Min(1)] int skipSpeedUp = 5;
+
+    // Event Functionality
+    private WaitForSeconds _textboxFullEventDelay;
+    [SerializeField][Range(0.1f, 0.5f)] private float sendDoneDelay = 0.25f;
+
+    public static event Action CompleteTextRevealed;
+    public static event Action<char> CharacterRevealed;
+
     void Start()
     {
-        _gameManager = FindAnyObjectByType<GameManager>();
+        _gameManager = FindObjectOfType<GameManager>();
         dialogueQueue = new Queue<string>();
-        dialogueUI.SetActive(false);    
+        dialogueUI.SetActive(false);
+
+        _simpleDelay = new WaitForSeconds(1 / characterPerSecond);
+        _interpuntuationDelay = new WaitForSeconds(interpuntuationDelay);
+
+        _skipDelay = new WaitForSeconds(1 / characterPerSecond * skipSpeedUp);
+        _textboxFullEventDelay = new WaitForSeconds(sendDoneDelay);
     }
 
     public void StartDialogue(string[] dialogue)
@@ -43,18 +75,37 @@ public class DialogueManager : MonoBehaviour
             return;
         }
         string currentLine = dialogueQueue.Dequeue();
-        StartCoroutine(TypeSentence(currentLine));
+        StartTypewriterEffect(currentLine);
     }
 
-    IEnumerator TypeSentence(string sentence)
+    void StartTypewriterEffect(string text)
     {
-        dialogueText.text = ""; // Clear text before typing
+        dialogueText.text = string.Empty;
+        _currentlyVisibleCharacterIndex = 0;
 
-        foreach (char letter in sentence.ToCharArray())
+        if (_typewriterCoroutine != null)
+            StopCoroutine(_typewriterCoroutine);
+
+        _typewriterCoroutine = StartCoroutine(Typewriter(text));
+    }
+
+    private IEnumerator Typewriter(string text)
+    {
+        while (_currentlyVisibleCharacterIndex < text.Length)
         {
-            dialogueText.text += letter;
-            yield return new WaitForSeconds(0.05f); // Adjust the time delay between each letter
+            char character = text[_currentlyVisibleCharacterIndex];
+            dialogueText.text += character;
+
+            if (!_currentlySkipping && (character == '?' || character == '.' || character == ',' || character == ':' || character == ';' || character == '!' || character == '-'))
+                yield return _interpuntuationDelay;
+            else
+                yield return _currentlySkipping ? _skipDelay : _simpleDelay;
+
+            CharacterRevealed?.Invoke(character);
+            _currentlyVisibleCharacterIndex++;
         }
+
+        CompleteTextRevealed?.Invoke();
     }
 
     void EndDialogue()

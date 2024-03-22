@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 197779864}
   - component: {fileID: 197779865}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: InfoUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 217727537}
   - component: {fileID: 217727539}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DialogueUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,6 +262,11 @@ MonoBehaviour:
   dialogueText: {fileID: 255791130}
   player: {fileID: 748770489524771611}
   animator: {fileID: 8631038402782928742}
+  characterPerSecond: 38
+  interpuntuationDelay: 0.14
+  quickSkip: 0
+  skipSpeedUp: 5
+  sendDoneDelay: 0.25
 --- !u!1 &255791128
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,7 +278,7 @@ GameObject:
   - component: {fileID: 255791129}
   - component: {fileID: 255791131}
   - component: {fileID: 255791130}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Txt_Dialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -647,7 +652,7 @@ GameObject:
   - component: {fileID: 510500182}
   - component: {fileID: 510500184}
   - component: {fileID: 510500183}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Panel
   m_TagString: InfoDialogue
   m_Icon: {fileID: 0}
@@ -724,7 +729,7 @@ GameObject:
   - component: {fileID: 602945438}
   - component: {fileID: 602945440}
   - component: {fileID: 602945439}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Txt_InfoDialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -858,7 +863,7 @@ GameObject:
   - component: {fileID: 756340055}
   - component: {fileID: 756340057}
   - component: {fileID: 756340056}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SignInfoPanel
   m_TagString: InfoDialogue
   m_Icon: {fileID: 0}
@@ -1169,6 +1174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1320634936}
   - component: {fileID: 1320634937}
+  - component: {fileID: 1320634938}
   m_Layer: 0
   m_Name: exclamation
   m_TagString: Untagged
@@ -1185,9 +1191,9 @@ Transform:
   m_GameObject: {fileID: 1320634935}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.037, y: 0.661, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0.037, y: 0.545, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4830364575400857260}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1243,6 +1249,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1320634938
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320634935}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: afc006baa0533d74d8bf5fe6e4386fbd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1340137576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,7 +1281,7 @@ GameObject:
   - component: {fileID: 1340137577}
   - component: {fileID: 1340137579}
   - component: {fileID: 1340137578}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Btn_Txt_Nxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1442,7 +1469,7 @@ GameObject:
   - component: {fileID: 1497451753}
   - component: {fileID: 1497451752}
   - component: {fileID: 1497451751}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Btn_Next
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1575,7 +1602,7 @@ GameObject:
   - component: {fileID: 1603006643}
   - component: {fileID: 1603006642}
   - component: {fileID: 1603006641}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Btn_Close
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1707,7 +1734,7 @@ GameObject:
   - component: {fileID: 1927975482}
   - component: {fileID: 1927975484}
   - component: {fileID: 1927975483}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Btn_Txt_Nxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2402,7 +2429,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1584097425407957909}
   - component: {fileID: 1842942452808543735}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TextHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3358,7 +3385,7 @@ GameObject:
   - component: {fileID: 648258735291158373}
   - component: {fileID: 5293587959138736213}
   - component: {fileID: 6431004011547608460}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Txt_Roll_Gm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6368,7 +6395,7 @@ GameObject:
   - component: {fileID: 4429050673792255010}
   - component: {fileID: 1521983081760882762}
   - component: {fileID: 6940240041520284941}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Txt_Pause_Gm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9150,7 +9177,7 @@ GameObject:
   - component: {fileID: 7245322284807852464}
   - component: {fileID: 8097900809384391357}
   - component: {fileID: 6618576449703742166}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Txt_Run_Gm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
