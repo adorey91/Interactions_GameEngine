@@ -23,17 +23,18 @@ public class GameManager : MonoBehaviour
     [Header("Other Managers")]
     public UIManager _uiManager;
     public LevelManager _levelManager;
+    public SoundManager _soundManager;
 
     public GameObject spawnPoint;
     public GameObject player;
-    [SerializeField] GameObject infoUI;
+
+    bool volumeLowered = false;
 
 
     public void Start()
     {
         gameState = GameState.MainMenu;
         StateSwitch();
-        infoUI.SetActive(false);
     }
 
     public void Update()
@@ -91,7 +92,7 @@ public class GameManager : MonoBehaviour
             gameState = GameState.GameWin;
         else if (state == "BeforeOptions")
             gameState = stateBeforeOptions;
-        else if(state == "Dialogue")
+        else if (state == "Dialogue")
             gameState = GameState.Dialogue;
         else
             Debug.Log("State doesnt exist");
@@ -108,26 +109,37 @@ public class GameManager : MonoBehaviour
     void MainMenu()
     {
         _uiManager.UI_MainMenu();
+        _soundManager.MainMenuAudio();
+        volumeLowered = false;
     }
 
     void GamePlay()
     {
         _uiManager.UI_GamePlay();
+        _soundManager.GameplayAudio();
+        volumeLowered = false;
     }
 
     void Pause()
     {
         _uiManager.UI_Pause();
+        if (volumeLowered == false)
+        {
+            _soundManager.audioSource.volume = _soundManager.audioSource.volume / 2;
+            volumeLowered = true;
+        }
     }
 
     void GameWin()
     {
         _uiManager.UI_GameWin();
+        _soundManager.GameWinAudio();
     }
 
     void GameOver()
     {
         _uiManager.UI_GameOver();
+        _soundManager.GameOverAudio();
     }
 
     void Options()
@@ -138,15 +150,13 @@ public class GameManager : MonoBehaviour
     void Dialogue()
     {
         _uiManager.UI_Dialogue();
+        if (volumeLowered == false)
+        {
+            _soundManager.audioSource.volume = _soundManager.audioSource.volume / 2;
+            volumeLowered = true;
+        }
     }
     #endregion
-
-
-    public void ExitSign()
-    {
-        infoUI.SetActive(false);
-        LoadState("Gameplay");
-    }
 
     public void MovePlayerToSpawnLocation()
     {

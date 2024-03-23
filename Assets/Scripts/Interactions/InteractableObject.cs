@@ -23,13 +23,12 @@ public class InteractableObject : MonoBehaviour
     public string infoMessage;
     public float delayTime;
     public GameObject infoUI;
-    public TMP_Text infoDialogue;
-
-    [Header("Used for NPC Dialogue")]
-    [TextArea]
-    public string[] dialogue;
-
     [SerializeField] TMP_Text infoText;
+
+    [Header("Dialogue Settings")]
+    public TMP_Text infoDialogue;
+    public Dialogue dialogue;
+
 
     public void Awake()
     {
@@ -51,21 +50,9 @@ public class InteractableObject : MonoBehaviour
         StartCoroutine(ShowInfo(infoMessage, delayTime));
     }
 
-    public void Signs()
-    {
-        _gameManager.LoadState("Dialogue");
-
-        foreach (Transform child in infoUI.transform)
-            child.gameObject.SetActive(true);
-
-        infoDialogue = GameObject.Find("Txt_InfoDialogue").GetComponent<TMP_Text>();
-        infoDialogue.text = infoMessage;
-    }
-
     public void Pickup()
     {
         StartCoroutine(ShowInfo(infoMessage, delayTime));
-        Debug.Log($"{this.name} has been picked up");
     }
 
     public void Dialogue()

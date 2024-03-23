@@ -5306,8 +5306,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: You Win
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 09ed6fb1c125868449efc6db75d7e0a9, type: 2}
+  m_sharedMaterial: {fileID: -7756407752221201959, guid: 09ed6fb1c125868449efc6db75d7e0a9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5331,7 +5331,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.45
+  m_fontSize: 0.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5381,6 +5381,73 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 251577786}
   m_CullTransparentMesh: 1
+--- !u!1 &304004696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 304004697}
+  - component: {fileID: 304004698}
+  m_Layer: 0
+  m_Name: collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &304004697
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304004696}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 663299241}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &304004698
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304004696}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.037284493, y: 0.032982588}
+  serializedVersion: 2
+  m_Radius: 0.38097608
 --- !u!1 &311489013
 GameObject:
   m_ObjectHideFlags: 0
@@ -5471,11 +5538,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactType: 2
   infoMessage: Picked up coin
-  delayTime: 0.5
+  delayTime: 0.3
   infoUI: {fileID: 0}
-  infoDialogue: {fileID: 0}
-  dialogue: []
   infoText: {fileID: 0}
+  infoDialogue: {fileID: 0}
+  dialogue:
+    name: 
+    sentences: []
+    continueDialogue: 
+    endDialogue: 
 --- !u!212 &311489017
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5670,8 +5741,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: You Lose
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 09ed6fb1c125868449efc6db75d7e0a9, type: 2}
+  m_sharedMaterial: {fileID: -7756407752221201959, guid: 09ed6fb1c125868449efc6db75d7e0a9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5695,7 +5766,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.4
+  m_fontSize: 0.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5756,9 +5827,10 @@ GameObject:
   - component: {fileID: 663299241}
   - component: {fileID: 663299240}
   - component: {fileID: 663299242}
+  - component: {fileID: 663299243}
   m_Layer: 0
   m_Name: CliffordsHome
-  m_TagString: Untagged
+  m_TagString: Nothing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5801,8 +5873,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 85442763
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 1322296866, guid: 739bbc83ed2e3ab43939c486fd75f657, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5824,10 +5896,11 @@ Transform:
   m_GameObject: {fileID: 663299239}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.66495, y: 2.4828649, z: 0}
+  m_LocalPosition: {x: 20.04, y: 3.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 304004697}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &663299242
@@ -5859,12 +5932,35 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.037284493, y: 0.032982588}
   serializedVersion: 2
-  m_Radius: 0.38097608
+  m_Radius: 0.8
+--- !u!114 &663299243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663299239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5792e7110612844089b11494783126c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactType: 0
+  infoMessage: Clifford's House... There's a smell coming from it..
+  delayTime: 1
+  infoUI: {fileID: 0}
+  infoText: {fileID: 0}
+  infoDialogue: {fileID: 0}
+  dialogue:
+    name: 
+    sentences: []
+    continueDialogue: 
+    endDialogue: 
 --- !u!95 &712917115
 Animator:
   serializedVersion: 5
@@ -5961,7 +6057,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
 --- !u!212 &792483072
 SpriteRenderer:
@@ -6024,8 +6120,8 @@ Transform:
   m_GameObject: {fileID: 792483069}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.85, y: -6.26, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: -5, y: -6, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1618139680}
@@ -6093,7 +6189,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
 --- !u!212 &825831724
 SpriteRenderer:
@@ -6156,8 +6252,8 @@ Transform:
   m_GameObject: {fileID: 825831721}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.1, y: -6.26, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 5, y: -6, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1240698401}
@@ -45006,11 +45102,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactType: 2
   infoMessage: Picked up coin
-  delayTime: 0.5
+  delayTime: 0.3
   infoUI: {fileID: 0}
-  infoDialogue: {fileID: 0}
-  dialogue: []
   infoText: {fileID: 0}
+  infoDialogue: {fileID: 0}
+  dialogue:
+    name: 
+    sentences: []
+    continueDialogue: 
+    endDialogue: 
 --- !u!212 &971419199
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -50876,16 +50976,20 @@ MonoBehaviour:
   infoMessage: 
   delayTime: 0
   infoUI: {fileID: 0}
+  infoText: {fileID: 0}
   infoDialogue: {fileID: 0}
   dialogue:
-  - Sup nerds
-  - The name's Clifford, ford for short
-  - I use to be a stockbroker on Wall Street... and then it happened....
-  - And now I live under that rock over der
-  - Oh. I just found a pickle in my beard. Yum
-  - '*crunch* *crunch* *crunch*'
-  - So good.
-  infoText: {fileID: 0}
+    name: Clifford
+    sentences:
+    - Sup nerd
+    - The name's Clifford, ford for short
+    - I use to be a stockbroker on Wall Strett... and then IT happened...
+    - And now I live under that rock over there
+    - OoOoO.. I just found a pickle in my beard. Yum
+    - '*crunch* *crunch* *crunch* '
+    - So good. Anyways. Bye
+    continueDialogue: okay...
+    endDialogue: Good...bye?
 --- !u!114 &1713470067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51993,9 +52097,13 @@ MonoBehaviour:
   infoMessage: It's a rock.
   delayTime: 0.6
   infoUI: {fileID: 0}
-  infoDialogue: {fileID: 0}
-  dialogue: []
   infoText: {fileID: 0}
+  infoDialogue: {fileID: 0}
+  dialogue:
+    name: 
+    sentences: []
+    continueDialogue: 
+    endDialogue: 
 --- !u!114 &3231815427474685475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52010,11 +52118,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactType: 2
   infoMessage: Picked up coin
-  delayTime: 0.5
+  delayTime: 0.3
   infoUI: {fileID: 0}
-  infoDialogue: {fileID: 0}
-  dialogue: []
   infoText: {fileID: 0}
+  infoDialogue: {fileID: 0}
+  dialogue:
+    name: 
+    sentences: []
+    continueDialogue: 
+    endDialogue: 
 --- !u!212 &3369396792831532073
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -52598,11 +52710,19 @@ MonoBehaviour:
   infoMessage: 
   delayTime: 1
   infoUI: {fileID: 0}
+  infoText: {fileID: 0}
   infoDialogue: {fileID: 0}
   dialogue:
-  - Path North - Main Castle <br>Path East - Colosseum
-  - Path West - Dark Castle <br>Path South - Graveyard / Treehouse
-  infoText: {fileID: 0}
+    name: 
+    sentences:
+    - 'Path North - Main Castle
+
+      Path South - Graveyard & Treehouse'
+    - 'Path East - Colosseum
+
+      Path West - Dark Castle'
+    continueDialogue: Alright
+    endDialogue: Got It!
 --- !u!114 &7141054547157772468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52615,13 +52735,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5792e7110612844089b11494783126c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactType: 4
-  infoMessage: No Access Currently. Come Back Later.
+  interactType: 3
+  infoMessage: 
   delayTime: 1
   infoUI: {fileID: 0}
-  infoDialogue: {fileID: 0}
-  dialogue: []
   infoText: {fileID: 0}
+  infoDialogue: {fileID: 0}
+  dialogue:
+    name: 
+    sentences:
+    - No Access Currently. Come Back Later.
+    continueDialogue: Alright
+    endDialogue: Got It!
 --- !u!114 &7141054547713402016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52634,13 +52759,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5792e7110612844089b11494783126c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactType: 1
-  infoMessage: 'Go Away. '
+  interactType: 3
+  infoMessage: 
   delayTime: 1
   infoUI: {fileID: 0}
-  infoDialogue: {fileID: 0}
-  dialogue: []
   infoText: {fileID: 0}
+  infoDialogue: {fileID: 0}
+  dialogue:
+    name: 
+    sentences:
+    - "You don't need in here. \nWeirdo."
+    continueDialogue: 
+    endDialogue: Rude...
 --- !u!212 &7231874474260367886
 SpriteRenderer:
   m_ObjectHideFlags: 0

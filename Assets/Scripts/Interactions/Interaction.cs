@@ -29,8 +29,6 @@ public class Interaction : MonoBehaviour
             interactableObject.Info();
         else if (interactableObject.interactType == InteractableObject.InteractType.Dialogue)
             interactableObject.Dialogue();
-        else if (interactableObject.interactType == InteractableObject.InteractType.Signs)
-            interactableObject.Signs();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

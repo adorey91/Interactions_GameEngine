@@ -4,115 +4,88 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Object = UnityEngine.Object;
 
 public class DialogueManager : MonoBehaviour
 {
-    [SerializeField] GameManager _gameManager;
+    private Queue<string> sentences;
+    private GameManager _gameManager;
+    [Header("UI")]
     public GameObject dialogueUI;
+    public Button UIbutton;
+    public TMP_Text dialogueName;
     public TMP_Text dialogueText;
-    public GameObject player;
-    public Animator animator;
+    public TMP_Text dialogueButtonText;
+    public float fadeSpeed;
+    bool isFaded = true;
+    private string endDialogue;
+    CanvasGroup canvGroup;
 
-    private Queue<string> dialogueQueue;
-
-    private int _currentlyVisibleCharacterIndex;
-    private Coroutine _typewriterCoroutine;
-
-    private WaitForSeconds _simpleDelay;
-    private WaitForSeconds _interpuntuationDelay;
-
-    [Header("Typewriter Settings")]
-    [SerializeField] float characterPerSecond = 20;
-    [SerializeField] float interpuntuationDelay = 0.5f;
-
-    //Skipping Functionality
-    private bool _currentlySkipping;
-    private WaitForSeconds _skipDelay;
-
-    [Header("Skip Options")]
-    [SerializeField] bool quickSkip;
-    [SerializeField][Min(1)] int skipSpeedUp = 5;
-
-    // Event Functionality
-    private WaitForSeconds _textboxFullEventDelay;
-    [SerializeField][Range(0.1f, 0.5f)] private float sendDoneDelay = 0.25f;
-
-    public static event Action CompleteTextRevealed;
-    public static event Action<char> CharacterRevealed;
-
-    void Start()
+    public void Start()
     {
-        _gameManager = FindObjectOfType<GameManager>();
-        dialogueQueue = new Queue<string>();
+        canvGroup = dialogueUI.GetComponent<CanvasGroup>();
+
+        _gameManager = FindObjectOfType<GameManager>(gameObject);
+        sentences = new Queue<string>();
         dialogueUI.SetActive(false);
-
-        _simpleDelay = new WaitForSeconds(1 / characterPerSecond);
-        _interpuntuationDelay = new WaitForSeconds(interpuntuationDelay);
-
-        _skipDelay = new WaitForSeconds(1 / characterPerSecond * skipSpeedUp);
-        _textboxFullEventDelay = new WaitForSeconds(sendDoneDelay);
     }
 
-    public void StartDialogue(string[] dialogue)
+
+    public void StartDialogue(Dialogue dialogue)
     {
         _gameManager.LoadState("Dialogue");
-        dialogueQueue.Clear();
+        sentences.Clear();
         dialogueUI.SetActive(true);
+        StartCoroutine(FadeObject(canvGroup, canvGroup.alpha, isFaded? 1:0));
+        isFaded = !isFaded;
 
-        foreach (string currentLine in dialogue)
+
+        dialogueName.text = dialogue.name;
+        dialogueButtonText.text = dialogue.continueDialogue;
+        endDialogue = dialogue.endDialogue;
+
+
+        foreach (string sentence in dialogue.sentences)
         {
-            dialogueQueue.Enqueue(currentLine);
+            sentences.Enqueue(sentence);
         }
+
         DisplayNextSentence();
     }
 
     public void DisplayNextSentence()
     {
-        if (dialogueQueue.Count == 0)
+        if (sentences.Count == 0)
         {
             EndDialogue();
             return;
         }
-        string currentLine = dialogueQueue.Dequeue();
-        StartTypewriterEffect(currentLine);
-    }
+        if (sentences.Count == 1)
+            dialogueButtonText.text = endDialogue;
 
-    void StartTypewriterEffect(string text)
-    {
-        dialogueText.text = string.Empty;
-        _currentlyVisibleCharacterIndex = 0;
-
-        if (_typewriterCoroutine != null)
-            StopCoroutine(_typewriterCoroutine);
-
-        _typewriterCoroutine = StartCoroutine(Typewriter(text));
-    }
-
-    private IEnumerator Typewriter(string text)
-    {
-        while (_currentlyVisibleCharacterIndex < text.Length)
-        {
-            char character = text[_currentlyVisibleCharacterIndex];
-            dialogueText.text += character;
-
-            if (!_currentlySkipping && (character == '?' || character == '.' || character == ',' || character == ':' || character == ';' || character == '!' || character == '-'))
-                yield return _interpuntuationDelay;
-            else
-                yield return _currentlySkipping ? _skipDelay : _simpleDelay;
-
-            CharacterRevealed?.Invoke(character);
-            _currentlyVisibleCharacterIndex++;
-        }
-
-        CompleteTextRevealed?.Invoke();
+        string sentence = sentences.Dequeue();
+        dialogueText.text = sentence;
     }
 
     void EndDialogue()
     {
-        dialogueQueue.Clear();
+        StartCoroutine(FadeObject(canvGroup, canvGroup.alpha, isFaded ? 1 : 0));
+        isFaded = !isFaded;
+        sentences.Clear();
         dialogueUI.SetActive(false);
 
         _gameManager.LoadState("Gameplay");
+    }
+
+    IEnumerator FadeObject(CanvasGroup canvasGroup, float start, float end)
+    {
+        float counter = 0f;
+
+        while(counter < fadeSpeed)
+        {
+            counter += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Lerp(start, end, counter/fadeSpeed);
+
+            yield return null;
+        }
     }
 }
