@@ -24,10 +24,6 @@ public class GameManager : MonoBehaviour
     public UIManager _uiManager;
     public LevelManager _levelManager;
 
-    [Header("Text UI")]
-    [SerializeField] TMP_Text currentStateText;
-    [SerializeField] TMP_Text currentScene;
-
     public GameObject spawnPoint;
     public GameObject player;
     [SerializeField] GameObject infoUI;
@@ -38,8 +34,6 @@ public class GameManager : MonoBehaviour
         gameState = GameState.MainMenu;
         StateSwitch();
         infoUI.SetActive(false);
-        currentStateText.text = $"State: {gameState}";
-        currentScene.text = $"Scene: {SceneManager.GetActiveScene().name}";
     }
 
     public void Update()
@@ -50,8 +44,6 @@ public class GameManager : MonoBehaviour
         if (gameState != currentState)
             StateSwitch();
 
-        currentStateText.text = $"State: {gameState}";
-        currentScene.text = $"Scene: {SceneManager.GetActiveScene().name}";
     }
 
     public void StateSwitch()
