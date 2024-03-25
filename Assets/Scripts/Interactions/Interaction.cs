@@ -7,6 +7,7 @@ public class Interaction : MonoBehaviour
     [SerializeField] GameObject interactable = null;
     [SerializeField] InteractableObject interactableObject = null;
     [SerializeField] GameObject canInteract;
+    public KeyCode interactKey = KeyCode.Space;
 
     private void Start()
     {
@@ -15,7 +16,7 @@ public class Interaction : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return) && interactableObject != null)
+        if (Input.GetKeyDown(interactKey) && interactableObject != null)
             CheckInteraction();
     }
 

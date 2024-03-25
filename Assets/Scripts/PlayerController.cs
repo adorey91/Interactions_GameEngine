@@ -12,6 +12,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isRunning;
     [SerializeField] private bool isRolling;
 
+    [Header("Controls")]
+    public KeyCode runKey = KeyCode.LeftShift;
+    public KeyCode rollKey = KeyCode.R;
+    
+
     public void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -23,7 +28,7 @@ public class PlayerController : MonoBehaviour
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(rollKey))
             isRolling = true;
     }
 
@@ -35,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMove()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(runKey))
         {
             moveSpeed = walkSpeed * 2;
             isRunning = true;

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using TMPro;
+using System.Linq;
 
 public class UIManager : MonoBehaviour
 {
@@ -19,9 +20,16 @@ public class UIManager : MonoBehaviour
     public GameObject playerSprite;
     private PlayerController playerController;
 
+    [Header("CoinHolder")]
+    [SerializeField] GameObject coinUISprite;
+    [SerializeField] GameObject uiParent;
+
     private void Awake()
     {
         playerController = player.GetComponent<PlayerController>();
+
+        if (uiParent == null)
+            uiParent = GameObject.Find("CoinHolder");
     }
 
     public void UI_MainMenu()
@@ -90,4 +98,9 @@ public class UIManager : MonoBehaviour
         Time.timeScale = time;
     }
 
+    public void AddCoinUI()
+    {
+        GameObject NewUIGem = Instantiate(coinUISprite);
+        NewUIGem.transform.SetParent(uiParent.transform);
+    }
 }

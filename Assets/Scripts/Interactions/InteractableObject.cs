@@ -18,6 +18,7 @@ public class InteractableObject : MonoBehaviour
 
     public InteractType interactType;
     GameManager _gameManager;
+    UIManager _uiManager;
 
     [Header("Information")]
     public string infoMessage;
@@ -33,8 +34,9 @@ public class InteractableObject : MonoBehaviour
     public void Awake()
     {
         _gameManager = FindAnyObjectByType<GameManager>();
-        infoUI = GameObject.Find("InfoUI");
+        _uiManager = FindAnyObjectByType<UIManager>();
 
+        infoUI = GameObject.Find("InfoUI");
         infoText = GameObject.Find("InfoText").GetComponent<TMP_Text>();
 
         infoText.text = null;
@@ -53,6 +55,7 @@ public class InteractableObject : MonoBehaviour
     public void Pickup()
     {
         StartCoroutine(ShowInfo(infoMessage, delayTime));
+        _uiManager.AddCoinUI();
     }
 
     public void Dialogue()
